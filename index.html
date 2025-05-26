@@ -93,9 +93,9 @@
 <body>
   <h1>Plan Interactif</h1>
   <div class="plan-container">
-    <div class="zone" style="top: 50px; left: 50px; width: 200px; height: 100px;" onclick="showRoomInfo('Salle Réunion 1')">Salle 1</div>
-    <div class="zone" style="top: 200px; left: 50px; width: 200px; height: 100px;" onclick="showRoomInfo('WC 1')">WC 1</div>
-    <div class="zone" style="top: 350px; left: 50px; width: 200px; height: 100px;" onclick="showRoomInfo('Ascenseur G')">Ascenseur G</div>
+    <div class="zone" style="top: 50px; left: 50px; width: 200px; height: 100px;" onclick="showRoomInfo('Zone 1')">Zone 1</div>
+    <div class="zone" style="top: 200px; left: 50px; width: 200px; height: 100px;" onclick="showRoomInfo('Zone 2')">Zone 2</div>
+    <div class="zone" style="top: 350px; left: 50px; width: 200px; height: 100px;" onclick="showRoomInfo('Zone 3')">Zone 3</div>
   </div>
 
   <div id="modal" class="modal">
@@ -111,20 +111,13 @@
   </div>
 
   <script>
-    const infos = {
-      "Salle Réunion 1": ["Extincteur", "Sortie de secours"],
-      "WC 1": ["Lave-mains", "Détecteur de fumée"],
-      "Ascenseur G": ["Ascenseur", "Alarme"]
-    };
-
     function showRoomInfo(roomName) {
       const modal = document.getElementById('modal');
       const title = document.getElementById('modal-title');
       const body = document.getElementById('modal-body');
-      const items = infos[roomName] || ["Aucune information disponible."];
 
       title.textContent = roomName;
-      body.innerHTML = `<ul>${items.map(item => `<li>${item}</li>`).join('')}</ul>`;
+      body.innerHTML = `<p>Aucune information disponible.</p>`;
 
       modal.classList.remove('minimized', 'maximized');
       modal.style.display = 'block';
@@ -146,3 +139,4 @@
   </script>
 </body>
 </html>
+

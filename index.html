@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Plan Interactif avec Fenêtre</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    h1 {
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .plan-container {
+      position: relative;
+      width: 600px;
+      height: 400px;
+      margin: 30px auto;
+      background-color: #f0f0f0;
+      border: 2px solid #ccc;
+    }
+
+    .zone {
+      position: absolute;
+      border: 2px solid #4CAF50;
+      background-color: rgba(76, 175, 80, 0.3);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    /* Fenêtre modale */
+    .modal {
+      position: fixed;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      background-color: white;
+      border: 2px solid #4CAF50;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      display: none;
+      z-index: 1000;
+    }
+
+    .modal-header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-body {
+      padding: 15px;
+      text-align: left;
+    }
+
+    .modal-buttons button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    .minimized .modal-body {
+      display: none;
+    }
+
+    .maximized {
+      width: 90%;
+      height: 80%;
+      top: 10%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Plan Interactif</h1>
+  <div class="plan-container">
+    <div class="zone" style="top: 20px; left: 20px; width: 100px; height: 60px;" onclick="showRoomInfo('Salle Réunion 1')">Salle 1</div>
+    <div class="zone" style="top: 100px; left: 20px; width: 100px; height: 60px;" onclick="showRoomInfo('WC 1')">WC 1</div>
+    <div class="zone" style="top: 180px; left: 20px; width: 100px; height: 60px;" onclick="showRoomInfo('Ascenseur G')">Asc G</div>
+  </div>
+
+  <div id="modal" class="modal">
+    <div class="modal-header">
+      <span id="modal-title">Titre</span>
+      <div class="modal-buttons">
+        <button onclick="toggleMinimize()">_</button>
+        <button onclick="toggleMaximize()">▢</button>
+        <button onclick="closeModal()">✖</button>
+      </div>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+
+  <script>
+    const infos = {
+      "Salle Réunion 1": ["Extincteur", "Sortie de secours"],
+      "WC 1": ["Lave-mains", "Détecteur de fumée"],
+      "Ascenseur G": ["Ascenseur", "Alarme"]
+    };
+
+    function showRoomInfo(roomName) {
+      const modal = document.getElementById('modal');
+      const title = document.getElementById('modal-title');
+      const body = document.getElementById('modal-body');
+      const items = infos[roomName] || ["Aucune information disponible."];
+
+      title.textContent = roomName;
+      body.innerHTML = `<ul>${items.map(item => `<li>${item}</li>`).join('')}</ul>`;
+
+      modal.classList.remove('minimized', 'maximized');
+      modal.style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    function toggleMinimize() {
+      const modal = document.getElementById('modal');
+      modal.classList.toggle('minimized');
+    }
+
+    function toggleMaximize() {
+      const modal = document.getElementById('modal');
+      modal.classList.toggle('maximized');
+    }
+  </script>
+</body>
+</html>

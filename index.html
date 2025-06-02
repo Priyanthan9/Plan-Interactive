@@ -1,78 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Floor Plan</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        .floor-plan {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            grid-template-rows: repeat(5, 1fr);
-            gap: 10px;
-            width: 80%;
-            height: 80%;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .room {
-            background-color: #d1e7dd;
-            border: 1px solid #bcd0c7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #333;
-        }
-        .corridor {
-            background-color: #f8d7da;
-            border: 1px solid #f5c2c7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #333;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Plan Interactif</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    .plan {
+      display: grid;
+      grid-template-columns: repeat(7, 80px);
+      grid-gap: 10px;
+      justify-content: center;
+    }
+    .room {
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .central {
+      grid-column: span 7;
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .central .room {
+      margin: 0 5px;
+    }
+  </style>
 </head>
 <body>
-    <div class="floor-plan">
-        <div class="room">Room 1</div>
-        <div class="room">Room 2</div>
-        <div class="corridor">Corridor</div>
-        <div class="room">Room 3</div>
-        <div class="room">Room 4</div>
-        <div class="room">Room 5</div>
-        <div class="room">Room 6</div>
-        <div class="corridor">Corridor</div>
-        <div class="room">Room 7</div>
-        <div class="room">Room 8</div>
-        <div class="corridor">Corridor</div>
-        <div class="corridor">Corridor</div>
-        <div class="corridor">Corridor</div>
-        <div class="corridor">Corridor</div>
-        <div class="corridor">Corridor</div>
-        <div class="room">Room 9</div>
-        <div class="room">Room 10</div>
-        <div class="corridor">Corridor</div>
-        <div class="room">Room 11</div>
-        <div class="room">Room 12</div>
-        <div class="room">Room 13</div>
-        <div class="room">Room 14</div>
-        <div class="corridor">Corridor</div>
-        <div class="room">Room 15</div>
-        <div class="room">Room 16</div>
-    </div>
+  <h1>Plan Interactif</h1>
+
+  <div class="plan">
+    <!-- Salles 1 à 56 -->
+    ${[...Array(56)].map((_, i) => `<div class="room">${i + 1}</div>`).join('\n    ')}
+  </div>
+
+  <!-- Bloc central -->
+  <div class="central">
+    <div class="room">R1</div>
+    <div class="room">ES</div>
+    <div class="room">R2</div>
+    <div class="room">WC</div>
+    <div class="room">SC</div>
+  </div>
+
+  <script>
+    const rooms = document.querySelectorAll('.room');
+    let roomWindow = null;
+
+    rooms.forEach(room => {
+      room.addEventListener('click', () => {
+        if (roomWindow) roomWindow.close();
+        roomWindow = window.open('', '_blank', 'width=400,height=300');
+        roomWindow.document.write(`<h1>Salle ${room.textContent}</h1>`);
+        roomWindow.document.write(`<p>Informations à venir pour la salle ${room.textContent}.</p>`);
+      });
+    });
+  </script>
 </body>
 </html>

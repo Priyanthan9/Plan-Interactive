@@ -1,69 +1,42 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Plan Interactif</title>
+  <meta charset="UTF-8">
+  <title>Plan de bâtiment simple</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      padding: 20px;
-    }
-    .plan {
-      display: grid;
-      grid-template-columns: repeat(7, 80px);
-      grid-gap: 10px;
-      justify-content: center;
+    svg {
+      border: 1px solid #333;
+      background-color: #f9f9f9;
     }
     .room {
-      background-color: #4CAF50;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      cursor: pointer;
-      border-radius: 5px;
+      fill: #e0e0e0;
+      stroke: #000;
+      stroke-width: 2;
     }
-    .central {
-      grid-column: span 7;
-      display: flex;
-      justify-content: center;
-      margin: 20px 0;
-    }
-    .central .room {
-      margin: 0 5px;
+    .label {
+      font-size: 14px;
+      fill: #000;
     }
   </style>
 </head>
 <body>
-  <h1>Plan Interactif</h1>
+  <h2>Plan de bâtiment (exemple simple)</h2>
+  <svg width="500" height="300">
+    <!-- Salon -->
+    <rect x="10" y="10" width="200" height="120" class="room" />
+    <text x="80" y="70" class="label">Salon</text>
 
-  <div class="plan">
-    <!-- Salles 1 à 56 -->
-    ${[...Array(56)].map((_, i) => `<div class="room">${i + 1}</div>`).join('\n    ')}
-  </div>
+    <!-- Cuisine -->
+    <rect x="220" y="10" width="120" height="120" class="room" />
+    <text x="250" y="70" class="label">Cuisine</text>
 
-  <!-- Bloc central -->
-  <div class="central">
-    <div class="room">R1</div>
-    <div class="room">ES</div>
-    <div class="room">R2</div>
-    <div class="room">WC</div>
-    <div class="room">SC</div>
-  </div>
+    <!-- Chambre -->
+    <rect x="10" y="140" width="150" height="120" class="room" />
+    <text x="50" y="200" class="label">Chambre</text>
 
-  <script>
-    const rooms = document.querySelectorAll('.room');
-    let roomWindow = null;
-
-    rooms.forEach(room => {
-      room.addEventListener('click', () => {
-        if (roomWindow) roomWindow.close();
-        roomWindow = window.open('', '_blank', 'width=400,height=300');
-        roomWindow.document.write(`<h1>Salle ${room.textContent}</h1>`);
-        roomWindow.document.write(`<p>Informations à venir pour la salle ${room.textContent}.</p>`);
-      });
-    });
-  </script>
+    <!-- Salle de bain -->
+    <rect x="170" y="140" width="100" height="120" class="room" />
+    <text x="180" y="200" class="label">SDB</text>
+  </svg>
 </body>
 </html>

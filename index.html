@@ -4,44 +4,88 @@
   <meta charset="UTF-8">
   <title>Plan Interactif</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    .highlight {
-      fill: rgba(255, 255, 0, 0.5);
-      stroke: #000;
-      stroke-width: 2;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 20%;
-      left: 30%;
-      width: 40%;
-      background: white;
-      border: 2px solid #444;
-      padding: 20px;
-      z-index: 10;
-    }
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 5;
-    }
-    .modal:target,
-    .modal:target + .overlay {
-      display: block;
-    }
-    .close {
-      float: right;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 18px;
-    }
-  </style>
+    
+body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .zoom-controls {
+      margin-bottom: 10px;
+    }
+
+    .zoom-controls label {
+      margin-right: 10px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    .plan-wrapper {
+      overflow: auto;
+      width: 100%;
+      height: 80vh;
+      border: 1px solid #ccc;
+    }
+
+    .plan {
+      transition: transform 0.3s ease;
+      transform-origin: top left;
+    }
+
+    /* Zoom dézommé */
+    #zoom-out:checked ~ .plan-wrapper .plan {
+      transform: scale(0.7);
+    }
+
+    /* Zoom normal */
+    #zoom-normal:checked ~ .plan-wrapper .plan {
+      transform: scale(1);
+    }
+
+    /* Zoom avant */
+    #zoom-in:checked ~ .plan-wrapper .plan {
+      transform: scale(1.3);
+    }
+
+    /* Modale */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 20%;
+      left: 30%;
+      width: 40%;
+      background: white;
+      border: 2px solid #444;
+      padding: 20px;
+      z-index: 10;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 5;
+    }
+
+    .modal:target,
+    .modal:target + .overlay {
+      display: block;
+    }
+
+    .close {
+      float: right;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+
 </head>
 <body>
 
